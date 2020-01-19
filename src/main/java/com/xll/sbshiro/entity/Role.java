@@ -15,4 +15,12 @@ import lombok.Data;
 @Data
 public class Role implements Serializable {
     private static final long serialVersionUID = -1894163644285296223L;
+
+    private Integer rid;
+
+    private String rname;
+
+    private String code;
+
+    private Integer type;
 }

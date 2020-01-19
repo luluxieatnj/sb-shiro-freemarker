@@ -20,7 +20,7 @@ public class UserServiceImpl implements IUserService {
     public User findByUserName(String userName) {
         // 造假数据  暂时不用dao层
         User user = new User();
-        user.setId(1001);
+        user.setUid(1001);
         user.setUserName("admin");
         user.setPassword("admin");
         return user;
