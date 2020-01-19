@@ -16,8 +16,13 @@ import lombok.Data;
 public class Permission implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    private Integer pid;
 
-    private String permissionName;
+    private String pname;
 
+    private String code;
+
+    private String url;
+
+    private String des;
 }

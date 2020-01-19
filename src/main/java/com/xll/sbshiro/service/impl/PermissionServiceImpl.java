@@ -8,8 +8,5 @@ import java.util.List;
 
 @Service
 public class PermissionServiceImpl implements IPermissionService {
-    @Override
-    public List<Permission> findAll() {
-        return null;
-    }
+
 }

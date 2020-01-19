@@ -1,19 +1,34 @@
 package com.xll.sbshiro.entity;
 
 import java.io.Serializable;
-import lombok.Data;
+import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 /**
  * 用户表
  */
 @Data
+@TableName("t_user")
 public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    private Integer id;
 
-    private String userName;
+    @TableId("uid")
+    private Integer uid;
 
-    private String password;
+    @TableField("uname")
+    private String uname;
 
+    @TableField("pwd")
+    private String pwd;
+
+    @TableField("rid")
+    private Integer rid;
+
+    @TableField("lastlogin")
+    private Date lastlogin;
 }
