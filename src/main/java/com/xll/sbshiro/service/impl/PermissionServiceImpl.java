@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 @Service
 public class PermissionServiceImpl implements IPermissionService {
 
+<<<<<<< HEAD
     @Override
     public List<Permission> findAll() {
         return null;
@@ -24,4 +25,6 @@ public class PermissionServiceImpl implements IPermissionService {
         set.add("select");
         return set;
     }
+=======
+>>>>>>> 51cfdbc7dce40777c53f15085fc80c9bd2181f7e
 }
