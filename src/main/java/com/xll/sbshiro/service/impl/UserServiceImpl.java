@@ -19,16 +19,5 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<IUserMapper, User> implements IUserService {
 
-<<<<<<< HEAD
-    @Override
-    public User findByUserName(String userName) {
-        // 造假数据  暂时不用dao层
-        User user = new User();
-        user.setUid(1001);
-        user.setUserName("admin");
-        user.setPassword("admin");
-        return user;
-    }
-=======
->>>>>>> 51cfdbc7dce40777c53f15085fc80c9bd2181f7e
+
 }
