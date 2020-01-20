@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xll.sbshiro.mapper.IPermissionMapper" >
+
+    <!-- sql片段 增加复用性 -->
+    <sql id="permission">
+        t2.pid pid,
+        t2.pname pname,
+        t2.`code` `code`,
+        t2.url url,
+        t2.des des
+    </sql>
+
+    <!-- 根据角色代码，查询该角色拥有的权限 -->
+    <select id="getListByRid" parameterType="integer" resultType="com.xll.sbshiro.entity.Permission">
+        SELECT
+            <include refid="permission"/>
+        FROM
+            t_role_permissiom t1
+            LEFT JOIN t_permision t2 ON t1.pid = t2.pid
+        WHERE
+            t1.rid = #{rid}
+    </select>
+
+    <!-- 根据用户名，查询该角色拥有的权限 -->
+    <select id="getListByUname" parameterType="string" resultType="com.xll.sbshiro.entity.Permission">
+        SELECT
+            <include refid="permission"/>
+        FROM
+            t_role_permissiom t1
+            LEFT JOIN t_permision t2 ON t1.pid = t2.pid
+            LEFT JOIN t_user t3 ON t1.rid = t3.rid
+        WHERE
+            t3.uname = 'admin'
+    </select>
+</mapper>

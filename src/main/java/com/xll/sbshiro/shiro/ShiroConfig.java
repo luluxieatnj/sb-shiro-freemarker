@@ -1,12 +1,14 @@
 package com.xll.sbshiro.shiro;
 
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -21,13 +23,32 @@ public class ShiroConfig {
 
     // 2.SecurityManager
     @Bean
-    public SecurityManager getSecurityManager(UserRealm userRealm) {
+    public SecurityManager getSecurityManager(UserRealm userRealm, SessionManager sessionManager) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setRealm(userRealm);
+//        manager.setSessionManager(sessionManager);
+        manager.setCacheManager(getEhCacheManager());
         return manager;
     }
 
+
+    /* 会话管理  SessionManager */
+    @Bean("sessionManager")
+    public SessionManager SessionManager() {
+        return new DefaultWebSessionManager();
+    }
+
+    /*  使用缓存   授权一次  再次请求就不会数据库查询 */
+    @Bean
+    public EhCacheManager getEhCacheManager(){
+        EhCacheManager ehcacheManager = new EhCacheManager();
+        ehcacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
+        return ehcacheManager;
+    }
+
+
     // 3. filter
+    @Bean
     public ShiroFilterFactoryBean getShiroFilterFactoryBean(SecurityManager manager) {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
 
@@ -48,9 +69,9 @@ public class ShiroConfig {
         // bean需要设置的5个对象
         // 1 2 3 4 5
         bean.setSecurityManager(manager);
-        bean.setLoginUrl("");
-        bean.setSuccessUrl("");
-        bean.setUnauthorizedUrl("");
+        bean.setLoginUrl("/login");  // todo  可以手动管理
+//        bean.setSuccessUrl("/home");  // todo 手动管理
+        bean.setUnauthorizedUrl("/login");  // todo  可以手动管理
         bean.setFilterChainDefinitionMap(filterMap);
         return bean;
     }
