@@ -42,7 +42,10 @@ public class ShiroConfig {
     @Bean
     public EhCacheManager getEhCacheManager(){
         EhCacheManager ehcacheManager = new EhCacheManager();
-        ehcacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
+        // 即使没有配置文件，默认会使用ehcache配置，不会有，缓存依然生效
+        // jar包中已经有  org/apache/shiro/cache/ehcache/ehcache.xml 配置文件
+
+//        ehcacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
         return ehcacheManager;
     }
 
